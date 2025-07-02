@@ -114,7 +114,7 @@ const SignInScreen = () => {
                   borderRadius={15}
                   fontSize={15}
                   align="center"
-                  paddingHorizontal={70}
+                  width="100%"
                   paddingVertical={12}
                   disabled={false}
                   style={{marginTop: 10, gap: 20}}
@@ -128,10 +128,9 @@ const SignInScreen = () => {
                   title="Continue with Facebook"
                   onPress={() => console.log('Pressed')}
                   backgroundColor="#4A66AC"
-                  borderRadius={15}
+                  borderRadius={15}  
                   fontSize={15}
                   align="center"
-                  paddingHorizontal={60}
                   paddingVertical={13}
                   disabled={false}
                   style={{marginTop: 10, gap: 30}}
