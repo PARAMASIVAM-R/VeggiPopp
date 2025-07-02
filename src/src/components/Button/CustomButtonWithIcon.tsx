@@ -17,6 +17,7 @@ interface CustomButtonWithIconProps {
   textColor?: string;
   paddingVertical?: number;
   paddingHorizontal?: number;
+  width?: number | string;
   borderRadius?: number;
   fontSize?: number;
   align?: 'left' | 'center' | 'right';
@@ -35,6 +36,7 @@ const CustomButtonWithIcon: React.FC<CustomButtonWithIconProps> = ({
   textColor = '#FFFFFF',
   paddingVertical = 0,
   paddingHorizontal = 0,
+  width,
   borderRadius = 0,
   fontSize = 16,
   align = 'center',
@@ -53,6 +55,7 @@ const CustomButtonWithIcon: React.FC<CustomButtonWithIconProps> = ({
       style={[
         styles.button,
         {
+          width: width || '100%',
           backgroundColor: disabled ? '#ccc' : backgroundColor,
           paddingVertical,
           paddingHorizontal,
@@ -126,6 +129,7 @@ export default CustomButtonWithIcon;
   align="center"
   paddingHorizontal={40}
   paddingVertical={13}
+  width = "100"
   disabled={false}
   style={{marginTop: 10, gap:30}}
   icon={require('../../assets/images/facebook.png')}

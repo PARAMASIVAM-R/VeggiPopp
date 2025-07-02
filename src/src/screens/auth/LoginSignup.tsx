@@ -18,7 +18,7 @@ import PasswordInput from '../../components/input/PasswordInput';
 import CustomButton from '../../components/Button/CustomButton';
 import InlinePressableText from '../../components/text/InlinePressableText';
 
-import {showToast} from '../../utils/toast';
+import {showToast} from '../../utils/toast';  
 import { isValidEmail, isValidPassword } from '../../utils/validators';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
