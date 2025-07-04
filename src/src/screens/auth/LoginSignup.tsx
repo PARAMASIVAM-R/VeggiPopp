@@ -155,8 +155,8 @@ const LoginSignup = () => {
                 value={password}
                 onChangeText={setPassword}
                 placeholder="Enter your password"
-                showIcon={require('../../assets/images/logo.png')}
-                hideIcon={require('../../assets/images/facebook.png')}
+                showIcon={require('../../assets/images/password-show.png')}
+                hideIcon={require('../../assets/images/password-hide.png')}
                 placeholderTextColor="#888"
                 isColumn={true}
                 inputContainerStyle={{
@@ -262,8 +262,8 @@ const LoginSignup = () => {
                 value={password}
                 onChangeText={setPassword}
                 placeholder="Enter your password"
-                showIcon={require('../../assets/images/logo.png')}
-                hideIcon={require('../../assets/images/facebook.png')}
+                showIcon={require('../../assets/images/password-show.png')}
+                hideIcon={require('../../assets/images/password-hide.png')}
                 placeholderTextColor="#888"
                 isColumn={true}
                 inputContainerStyle={{
@@ -295,7 +295,7 @@ const LoginSignup = () => {
                       fontWeight: 400,
                       pressedColor: 'red',
                       pressedOpacity: 0.9,
-                      textDecorationLine: 'none',
+                      textDecorationLine: 'underline',
                       onPress: () => console.log('Privacy clicked'),
                     },
                     {text: '.', color: 'black'},

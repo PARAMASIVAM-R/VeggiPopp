@@ -64,41 +64,6 @@ const IconButton: React.FC<IconButtonProps> = ({
     </TouchableOpacity>
   );
 
-// return disabled ? (
-//   <View
-//     style={[
-//       styles.button,
-//       {
-//         width:width,
-//         height:height,
-//         borderRadius:borderRadius,
-//         backgroundColor: backgroundColor,
-//         opacity: 1,
-//       },
-//       alignmentStyles,
-//       containerStyle,
-//     ]}
-//   >
-//     <Image source={icon} style={styles.icon} />
-//   </View>
-// ) : (
-//   <TouchableOpacity
-//     onPress={onPress}
-//     style={[
-//       styles.button,
-//       {
-//         width:width,
-//         height:height,
-//         borderRadius:borderRadius,
-//         backgroundColor: backgroundColor,
-//       },
-//       alignmentStyles,
-//       containerStyle,
-//     ]}
-//   >
-//     <Image source={icon} style={styles.icon} />
-//   </TouchableOpacity>
-// );
 };
 
 const styles = StyleSheet.create({

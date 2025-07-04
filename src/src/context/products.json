@@ -1,0 +1,245 @@
+{
+  "beverages": [
+    {
+      "id": "1",
+      "image": "https://example.com/coca-cola-2l.jpg",
+      "name": "Coca-Cola Soda Pop, 2 Liters Bottle",
+      "price": 4.44,
+      "details": "Carbonated soft drink",
+      "nutrition": "150 cal, 39g sugar per 355ml",
+      "review": "4.6/5 (200 reviews)",
+      "rating": 4.6,
+      "quantity": 0
+    },
+    {
+      "id": "2",
+      "image": "https://example.com/pepsi-2l.jpg",
+      "name": "Pepsi Soda, 2 Liters Bottle",
+      "price": 4.20,
+      "details": "Refreshing cola drink",
+      "nutrition": "150 cal, 41g sugar per 355ml",
+      "review": "4.5/5 (180 reviews)",
+      "rating": 4.5,
+      "quantity": 0
+    },
+    {
+      "id": "3",
+      "image": "https://example.com/sprite-2l.jpg",
+      "name": "Sprite Lemon-Lime, 2 Liters Bottle",
+      "price": 4.30,
+      "details": "Lemon-lime flavored soda",
+      "nutrition": "140 cal, 38g sugar per 355ml",
+      "review": "4.4/5 (160 reviews)",
+      "rating": 4.4,
+      "quantity": 0
+    },
+    {
+      "id": "4",
+      "image": "https://example.com/fanta-2l.jpg",
+      "name": "Fanta Orange, 2 Liters Bottle",
+      "price": 4.25,
+      "details": "Orange-flavored soda",
+      "nutrition": "160 cal, 44g sugar per 355ml",
+      "review": "4.3/5 (150 reviews)",
+      "rating": 4.3,
+      "quantity": 0
+    }
+  ],
+  "cookingOil": [
+    {
+      "id": "5",
+      "image": "https://example.com/olive-oil-1l.jpg",
+      "name": "Extra Virgin Olive Oil, 1 Liter",
+      "price": 12.99,
+      "details": "Cold-pressed, premium quality",
+      "nutrition": "120 cal, 14g fat per tbsp",
+      "review": "4.7/5 (170 reviews)",
+      "rating": 4.7,
+      "quantity": 0
+    },
+    {
+      "id": "6",
+      "image": "https://example.com/sunflower-oil-1l.jpg",
+      "name": "Sunflower Oil, 1 Liter",
+      "price": 8.50,
+      "details": "Light and versatile",
+      "nutrition": "120 cal, 14g fat per tbsp",
+      "review": "4.5/5 (140 reviews)",
+      "rating": 4.5,
+      "quantity": 0
+    },
+    {
+      "id": "7",
+      "image": "https://example.com/canola-oil-1l.jpg",
+      "name": "Canola Oil, 1 Liter",
+      "price": 7.75,
+      "details": "Heart-healthy cooking oil",
+      "nutrition": "120 cal, 14g fat per tbsp",
+      "review": "4.4/5 (130 reviews)",
+      "rating": 4.4,
+      "quantity": 0
+    }
+  ],
+  "fish": [
+    {
+      "id": "8",
+      "image": "https://example.com/salmon-1lb.jpg",
+      "name": "Fresh Salmon Fillet, 1 lb",
+      "price": 15.50,
+      "details": "Wild-caught, rich in omega-3",
+      "nutrition": "200 cal, 12g fat per 100g",
+      "review": "4.8/5 (190 reviews)",
+      "rating": 4.8,
+      "quantity": 0
+    },
+    {
+      "id": "9",
+      "image": "https://example.com/cod-1lb.jpg",
+      "name": "Fresh Cod Fillet, 1 lb",
+      "price": 12.00,
+      "details": "Mild-flavored white fish",
+      "nutrition": "105 cal, 1g fat per 100g",
+      "review": "4.6/5 (160 reviews)",
+      "rating": 4.6,
+      "quantity": 0
+    },
+    {
+      "id": "10",
+      "image": "https://example.com/tuna-1lb.jpg",
+      "name": "Fresh Tuna Steak, 1 lb",
+      "price": 14.00,
+      "details": "High-protein seafood",
+      "nutrition": "130 cal, 5g fat per 100g",
+      "review": "4.7/5 (170 reviews)",
+      "rating": 4.7,
+      "quantity": 0
+    }
+  ],
+  "vegetables": [
+    {
+      "id": "11",
+      "image": "https://example.com/carrots-2lb.jpg",
+      "name": "Organic Carrots, 2 lb Bag",
+      "price": 3.25,
+      "details": "Non-GMO, rich in beta-carotene",
+      "nutrition": "40 cal, 10g carbs per 100g",
+      "review": "4.5/5 (150 reviews)",
+      "rating": 4.5,
+      "quantity": 0
+    },
+    {
+      "id": "12",
+      "image": "https://example.com/broccoli-2lb.jpg",
+      "name": "Fresh Broccoli, 2 lb Bag",
+      "price": 3.50,
+      "details": "High in vitamins C and K",
+      "nutrition": "35 cal, 7g carbs per 100g",
+      "review": "4.6/5 (140 reviews)",
+      "rating": 4.6,
+      "quantity": 0
+    },
+    {
+      "id": "13",
+      "image": "https://example.com/spinach-1lb.jpg",
+      "name": "Fresh Spinach, 1 lb Bag",
+      "price": 2.75,
+      "details": "Iron-rich leafy green",
+      "nutrition": "23 cal, 4g carbs per 100g",
+      "review": "4.4/5 (130 reviews)",
+      "rating": 4.4,
+      "quantity": 0
+    },
+    {
+      "id": "14",
+      "image": "https://example.com/tomatoes-2lb.jpg",
+      "name": "Fresh Tomatoes, 2 lb Bag",
+      "price": 3.00,
+      "details": "Rich in lycopene",
+      "nutrition": "18 cal, 4g carbs per 100g",
+      "review": "4.5/5 (120 reviews)",
+      "rating": 4.5,
+      "quantity": 0
+    }
+  ],
+  "fruits": [
+    {
+      "id": "15",
+      "image": "https://example.com/clementines-5lb.jpg",
+      "name": "Fresh Clementines, 5 lb Bag",
+      "price": 6.97,
+      "details": "Sweet and juicy citrus",
+      "nutrition": "50 cal, 12g sugar per 100g",
+      "review": "4.6/5 (160 reviews)",
+      "rating": 4.6,
+      "quantity": 0
+    },
+    {
+      "id": "16",
+      "image": "https://example.com/apples-5lb.jpg",
+      "name": "Fresh Apples, 5 lb Bag",
+      "price": 6.50,
+      "details": "Crisp and sweet",
+      "nutrition": "52 cal, 14g sugar per 100g",
+      "review": "4.5/5 (150 reviews)",
+      "rating": 4.5,
+      "quantity": 0
+    },
+    {
+      "id": "17",
+      "image": "https://example.com/bananas-5lb.jpg",
+      "name": "Fresh Bananas, 5 lb Bag",
+      "price": 5.75,
+      "details": "Rich in potassium",
+      "nutrition": "90 cal, 23g sugar per 100g",
+      "review": "4.7/5 (170 reviews)",
+      "rating": 4.7,
+      "quantity": 0
+    }
+  ],
+  "meat": [
+    {
+      "id": "18",
+      "image": "https://example.com/chicken-breast-2lb.jpg",
+      "name": "Chicken Breast, 2 lb Pack",
+      "price": 8.99,
+      "details": "Free-range, lean meat",
+      "nutrition": "165 cal, 3g fat per 100g",
+      "review": "4.6/5 (140 reviews)",
+      "rating": 4.6,
+      "quantity": 0
+    },
+    {
+      "id": "19",
+      "image": "https://example.com/beef-steak-2lb.jpg",
+      "name": "Beef Steak, 2 lb Pack",
+      "price": 18.50,
+      "details": "Grass-fed, high-protein",
+      "nutrition": "250 cal, 15g fat per 100g",
+      "review": "4.8/5 (180 reviews)",
+      "rating": 4.8,
+      "quantity": 0
+    },
+    {
+      "id": "20",
+      "image": "https://example.com/pork-chops-2lb.jpg",
+      "name": "Pork Chops, 2 lb Pack",
+      "price": 12.75,
+      "details": "Juicy and tender",
+      "nutrition": "210 cal, 10g fat per 100g",
+      "review": "4.5/5 (130 reviews)",
+      "rating": 4.5,
+      "quantity": 0
+    },
+    {
+      "id": "21",
+      "image": "https://example.com/lamb-2lb.jpg",
+      "name": "Lamb, 2 lb Pack",
+      "price": 20.00,
+      "details": "Grass-fed, flavorful",
+      "nutrition": "260 cal, 17g fat per 100g",
+      "review": "4.7/5 (150 reviews)",
+      "rating": 4.7,
+      "quantity": 0
+    }
+  ]
+}

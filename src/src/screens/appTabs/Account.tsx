@@ -8,7 +8,8 @@ import Avatar from '../../components/Avatar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../../components/text/Header';
 
-const ProfileScreen = () => {
+const Account = () => {
+
   const { logout } = useContext(AuthContext);
   const [user, setUser] = useState(null);
 
@@ -25,7 +26,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Header title="Profile" />
+      
       <ScrollView contentContainerStyle={styles.scroll}>
       <Avatar uri="https://i.pravatar.cc/300" size={120} />
         {user ? (
@@ -40,8 +41,10 @@ const ProfileScreen = () => {
       <CustomButton title="Logout" onPress={logout} />
       </ScrollView>
     </View>
-  );
-};
+  )
+}
+
+export default Account
 
 const styles = StyleSheet.create({
   container: {
@@ -65,6 +68,4 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: colors.black,
   },
-});
-
-export default ProfileScreen;
+})
