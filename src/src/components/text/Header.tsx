@@ -31,13 +31,14 @@ const Header = ({
   title,
   color = colors.white,
   size = 10,
+  width = '100%',
   alignItems = 'center',
   textAlign = 'left',
   backgroundColor = colors.primary,
   paddingVertical = 0,
   paddingHorizontal = 10,
 }) => (
-  <View style={[styles.header, {backgroundColor, alignItems: alignItems, paddingVertical:paddingVertical, paddingHorizontal:paddingHorizontal}]}>
+  <View style={[styles.header, {backgroundColor,width:width, alignItems: alignItems, paddingVertical:paddingVertical, paddingHorizontal:paddingHorizontal}]}>
     <Text style={[styles.title, {color, fontSize: size, textAlign: textAlign}]}>
       {title}
     </Text>
@@ -47,7 +48,7 @@ const Header = ({
 const styles = StyleSheet.create({
   header: {
     // paddingVertical: 10,
-    width: '100%',
+    // width: '100%',
   },
   title: {
     fontWeight: 'bold',

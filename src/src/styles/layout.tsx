@@ -31,6 +31,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent:'space-evenly',
     alignItems: 'center',
+    backgroundColor:'red',
   },
   center: {
     justifyContent: 'center',
