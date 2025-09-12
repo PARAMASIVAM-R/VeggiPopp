@@ -10,6 +10,8 @@ import Cart from '../screens/appTabs/Cart';
 import Favourite from '../screens/appTabs/Favourite';
 import Account from '../screens/appTabs/Account';
 
+import componentTest from '../allComponents/screen/componentTest';
+
 const Tab = createBottomTabNavigator();
 
 const AppTabs = () => {
@@ -52,7 +54,7 @@ const AppTabs = () => {
       <Tab.Screen name="Shop" component={Shop} />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Cart" component={Cart} />
-      <Tab.Screen name="Favourite" component={Favourite} />
+      <Tab.Screen name="Favourite" component={componentTest} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );

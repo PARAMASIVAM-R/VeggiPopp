@@ -1,0 +1,126 @@
+
+********************** CustomDatePicker **********************************
+npm pkg :
+react-native-date-picker 
+date-fns
+ ✅1900 - current year
+const [selectedDate, setSelectedDate] = useState(new Date());
+
+<CustomDatePicker
+  initialDate={selectedDate}
+  onDateChange={(date) => setSelectedDate(date)}
+  accentColor="#FF7F50"
+/>
+
+***********************************************************************
+************************ DatePickerComp ***********************************************
+ ✅ centuary of current date
+const [selectedDate, setSelectedDate] = useState(new Date());
+
+<DatePickerComp
+  label="Start Date"
+  value={selectedDate}
+  onChange={date => setSelectedDate(date)}
+  placeholder="Select date"
+/>
+
+***************************************************************************
+************************** DatePickerInput *************************************************
+ ✅1900 - current year
+const [selectedDate, setSelectedDate] = useState(new Date());
+
+<DatePickerInput
+  title="Birth Date"
+  value={selectedDate}
+  onChange={date => setSelectedDate(date)}
+  placeholder="DD-MM-YYYY"
+/>
+
+
+***************************************************************************
+************************ AppDatePicker ***************************************************
+
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+
+✅ Full Width Example 
+<AppDatePicker
+  title="Start Date"
+  value={startDate}
+  onChange={setStartDate}
+  minDate={new Date(2020, 0, 1)}
+  maxDate={new Date()}
+  emptyIcon={GENERAL_IMAGE.calendar_empty}
+  filledIcon={GENERAL_IMAGE.calendar_filled}
+  width="full"
+/>
+
+✅ Half Width Example 
+<View style={styles.row}>
+  <AppDatePicker
+    title="Start Date"
+    value={startDate}
+    onChange={setStartDate}
+    width="half"
+/>
+
+✅
+<AppDatePicker
+  title="End Date"
+  value={endDate}
+  onChange={setEndDate}
+  width="half"
+/>
+****************************************************************
+******************** DateTimeCard ********************************************
+✅ date & time
+
+<DateTimeCard
+  initialDate={selectedDate}
+  initialTime={selectedTime}
+  onDateChange={date => {
+    console.log('Selected Date:', date);
+    setSelectedDate(date);
+  }}
+  onTimeChange={time => {
+    console.log('Selected Time:', time);
+    setSelectedTime(time);
+  }}
+/>
+****************************************************************
+****************************************************************
+✅ time 12hrs
+
+<TimePicker
+  value={selectedTime || new Date()} // pass a Date object
+  onChange={(date) => setSelectedTime(date)} // update state
+  label="Feeding Time"
+  placeholder="Pick a time"
+/>
+****************************************************************
+****************************************************************
+✅ time 24hrs
+
+const [snoozeTime, setSnoozeTime] = useState<Date>(new Date());
+
+<TimePickerComp
+  label="Snooze Duration"
+  value={snoozeTime}
+  onChange={setSnoozeTime}
+  placeholder="Select Snooze Time"
+/>
+
+****************************************************************
+****************************************************************
+✅ weekdays selected as circle S,M,T,W,T,F,S
+
+// state holds selected day indexes (0 = Monday, 6 = Sunday)
+const [selectedDays, setSelectedDays] = useState<number[]>([]);
+
+<WeekdaySelector
+  value={selectedDays}
+  onChange={setSelectedDays}
+/>
+****************************************************************
+****************************************************************
+

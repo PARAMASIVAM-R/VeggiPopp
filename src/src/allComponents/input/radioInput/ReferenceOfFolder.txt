@@ -1,0 +1,30 @@
+
+********************************************************
+ const [selected, setSelected] = useState<'yes' | 'no' | ''>(''); // default = none
+
+ <YesNoRadio
+    value={selected}
+    onValueChange={setSelected} // this will update state
+    yesLabel="Yes, enable"
+    noLabel="No, disable"
+    color="#8A3E94" // optional custom color
+  />
+
+********************************************************
+********************************************************
+
+ const [selectedGender, setSelectedGender] = useState<string>(''); // default no selection
+
+  const genderOptions = [
+    {value: 'male', label: 'Male'},
+    {value: 'female', label: 'Female'},
+    {value: 'other', label: 'Other'},
+  ];
+
+<RadioSelection
+  options={genderOptions}
+  selectedValue={selectedGender}
+  onValueChange={setSelectedGender}
+  label="Gender"
+/>
+***********************************************************************

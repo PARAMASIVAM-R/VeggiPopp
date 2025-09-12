@@ -1,0 +1,381 @@
+import React, { useState } from 'react';
+import { View, ScrollView, Alert } from 'react-native';
+import {
+  responsiveWidth as rw,
+  responsiveHeight as rh,
+} from 'react-native-responsive-dimensions';
+import {
+  DropDownInputField
+} from '../../components/InputFields/DropDownInputField';
+import { DateInputField } from '../../components/InputFields/DateInputField';
+import { InputField } from '../../components/InputFields/InputField';
+import { InputFieldWithDropdown } from '../../components/InputFields/InputFieldWithDropdown';
+import { InputFieldWithUnits } from '../../components/InputFields/InputFieldWithUnits';
+
+
+const InputComponentsExample = () => {
+  // ========== STATE VARIABLES ==========
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [birthDate, setBirthDate] = useState<Date | null>(null);
+  const [appointmentDate, setAppointmentDate] = useState<Date | null>(null);
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [experience, setExperience] = useState('');
+  const [selectedExperienceUnit, setSelectedExperienceUnit] = useState('Years');
+  const [height, setHeight] = useState('');
+  const [selectedHeightUnit, setSelectedHeightUnit] = useState('feet');
+  const [weight, setWeight] = useState('');
+  const [selectedWeightDropdown, setSelectedWeightDropdown] = useState('kg');
+
+  // ========== DROPDOWN DATA ==========
+  const countryData = [
+    { label: 'India', value: 'india' },
+    { label: 'United States', value: 'usa' },
+    { label: 'United Kingdom', value: 'uk' },
+    { label: 'Australia', value: 'australia' },
+    { label: 'Canada', value: 'canada' },
+  ];
+
+  const cityData = [
+    { label: 'Chennai', value: 'chennai' },
+    { label: 'Mumbai', value: 'mumbai' },
+    { label: 'Delhi', value: 'delhi' },
+    { label: 'Bangalore', value: 'bangalore' },
+    { label: 'Hyderabad', value: 'hyderabad' },
+  ];
+
+  const experienceOptions = ['0-1 Years', '2-5 Years', '5-10 Years', '10+ Years'];
+  const weightOptions = ['kg', 'lbs', 'pounds'];
+
+  // ========== HANDLERS ==========
+  const handleInfoPress = () => {
+    Alert.alert('Info', 'Please select your date of birth');
+  };
+
+  const handleCountryChange = (value: string) => {
+    setSelectedCountry(value);
+    console.log('Selected Country:', value);
+  };
+
+  const handleCityChange = (value: string) => {
+    setSelectedCity(value);
+    console.log('Selected City:', value);
+  };
+
+  const handleDateChange = (date: Date) => {
+    setBirthDate(date);
+    console.log('Selected Date:', date);
+  };
+
+  const handleAppointmentDateChange = (date: Date) => {
+    setAppointmentDate(date);
+    console.log('Selected Appointment Date:', date);
+  };
+
+  const handleExperienceSelect = (option: string) => {
+    setSelectedExperienceUnit(option);
+    console.log('Selected Experience:', option);
+  };
+
+  const handleHeightUnitPress = (unit: string) => {
+    setSelectedHeightUnit(unit);
+    console.log('Selected Height Unit:', unit);
+  };
+
+  const handleWeightSelect = (option: string) => {
+    setSelectedWeightDropdown(option);
+    console.log('Selected Weight Unit:', option);
+  };
+
+  return (
+    <ScrollView style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
+      <View style={{ padding: 20 }}>
+        
+        {/* ========== 1. DROPDOWN EXAMPLES ========== */}
+        <DropDownInputField
+          label="Select Country"
+          data={countryData}
+          value={selectedCountry}
+          onChange={handleCountryChange}
+          placeholder="Choose your country"
+          showSearch={true}
+          containerStyle={{ marginBottom: rh(3) }}
+        />
+
+        <DropDownInputField
+          label="Select City"
+          data={cityData}
+          value={selectedCity}
+          onChange={handleCityChange}
+          placeholder="Choose your city"
+          error={selectedCountry && !selectedCity ? 'Please select a city' : undefined}
+          disabled={!selectedCountry}
+          containerStyle={{ minWidth: rw(85) }}
+        />
+
+        <DropDownInputField
+          label="Select State (Error Example)"
+          data={[]}
+          value={null}
+          onChange={() => {}}
+          placeholder="No options available"
+          error="This field has an error"
+          containerStyle={{ marginBottom: rh(2) }}
+        />
+
+        {/* ========== 2. DATE INPUT EXAMPLES ========== */}
+        <DateInputField
+          label="Date of Birth"
+          value={birthDate}
+          placeholder="dd/mm/yyyy"
+          onDateChange={handleDateChange}
+          showInfoIcon={true}
+          onInfoPress={handleInfoPress}
+          width="full"
+          containerStyle={{ minWidth: rw(85) }}
+          maximumDate={new Date()}
+        />
+
+        <DateInputField
+          label="Appointment Date"
+          value={appointmentDate}
+          placeholder="Select date"
+          onDateChange={handleAppointmentDateChange}
+          minimumDate={new Date()}
+          width="half"
+          containerStyle={{ marginBottom: rh(2) }}
+        />
+
+        <DateInputField
+          label="Disabled Date Field"
+          value={null}
+          placeholder="Cannot select"
+          onDateChange={() => {}}
+          disabled={true}
+          error="This field is disabled"
+        />
+
+        {/* ========== 3. REGULAR INPUT EXAMPLES ========== */}
+        <InputField
+          label="Full Name"
+          value={fullName}
+          placeholder="Enter your full name"
+          onChangeText={setFullName}
+          containerStyle={{ marginBottom: rh(2) }}
+          maxLength={50}
+        />
+
+        <InputField
+          label="Email Address"
+          value={email}
+          placeholder="Enter your email"
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          error={email && !email.includes('@') ? 'Please enter a valid email' : undefined}
+        />
+
+        <InputField
+          label="Phone Number"
+          value={phoneNumber}
+          placeholder="Enter your phone number"
+          onChangeText={setPhoneNumber}
+          keyboardType="phone-pad"
+          width="half"
+          containerStyle={{ marginBottom: rh(2) }}
+        />
+
+        <InputField
+          label="Address"
+          value={address}
+          placeholder="Enter your address"
+          onChangeText={setAddress}
+          multiline={true}
+          containerStyle={{ marginBottom: rh(2) }}
+        />
+
+        <InputField
+          label="Disabled Field"
+          value="This field is disabled"
+          placeholder="Cannot edit"
+          onChangeText={() => {}}
+          disabled={true}
+          error="This field has an error too"
+        />
+
+        {/* ========== 4. INPUT WITH DROPDOWN EXAMPLES ========== */}
+        <InputFieldWithDropdown
+          label="Work Experience"
+          value={experience}
+          onChangeText={setExperience}
+          placeholder="Enter experience details"
+          required={true}
+          showDropdown={true}
+          dropdownOptions={experienceOptions}
+          selectedOption={selectedExperienceUnit}
+          onOptionSelect={handleExperienceSelect}
+          containerStyle={{ marginBottom: rh(2) }}
+        />
+
+        <InputFieldWithDropdown
+          label="Skills (Error Example)"
+          value=""
+          onChangeText={() => {}}
+          placeholder="Enter your skills"
+          errorMessage="This field is required"
+          showDropdown={true}
+          dropdownOptions={['React', 'React Native', 'JavaScript', 'TypeScript']}
+          selectedOption="React"
+          onOptionSelect={() => {}}
+        />
+
+        <InputFieldWithDropdown
+          label="Disabled Input with Dropdown"
+          value="Cannot edit this"
+          onChangeText={() => {}}
+          placeholder="Disabled field"
+          editable={false}
+          showDropdown={true}
+          dropdownOptions={['Option 1', 'Option 2']}
+          selectedOption="Option 1"
+          onOptionSelect={() => {}}
+        />
+
+        {/* ========== 5. INPUT WITH UNITS EXAMPLES ========== */}
+        <InputFieldWithUnits
+          label="Height"
+          value={height}
+          onChangeText={setHeight}
+          placeholder="Enter height"
+          keyboardType="numeric"
+          unit="feet"
+          showUnitButtons={true}
+          unitButtons={['feet', 'cm', 'inches']}
+          selectedUnitButton={selectedHeightUnit}
+          onUnitButtonPress={handleHeightUnitPress}
+          containerStyle={{ marginBottom: rh(2) }}
+        />
+
+        <InputFieldWithUnits
+          label="Weight"
+          value={weight}
+          onChangeText={setWeight}
+          placeholder="Enter weight"
+          keyboardType="numeric"
+          showDropdown={true}
+          dropdownOptions={weightOptions}
+          selectedOption={selectedWeightDropdown}
+          onOptionSelect={handleWeightSelect}
+          required={true}
+        />
+
+        <InputFieldWithUnits
+          label="Distance (Error Example)"
+          value=""
+          onChangeText={() => {}}
+          placeholder="Enter distance"
+          unit="km"
+          errorMessage="This field is required"
+          showUnitButtons={true}
+          unitButtons={['km', 'miles', 'm']}
+          selectedUnitButton="km"
+          onUnitButtonPress={() => {}}
+        />
+
+        <InputFieldWithUnits
+          label="Disabled Unit Field"
+          value="100"
+          onChangeText={() => {}}
+          placeholder="Cannot edit"
+          unit="kg"
+          editable={false}
+          showUnitButtons={true}
+          unitButtons={['kg', 'lbs']}
+          selectedUnitButton="kg"
+          onUnitButtonPress={() => {}}
+          containerStyle={{ marginBottom: rh(4) }}
+        />
+
+      </View>
+    </ScrollView>
+  );
+};
+
+export default InputComponentsExample;
+
+// ========== USAGE NOTES ==========
+/*
+
+1. DROPDOWN COMPONENT:
+   - Basic usage with data array
+   - Search enabled with showSearch={true}  
+   - Error states and disabled states
+   - Custom container styling
+
+2. DATE INPUT COMPONENT:
+   - Date selection with format
+   - Info icon with custom press handler
+   - Min/max date restrictions
+   - Half/full width options
+   - Disabled and error states
+
+3. REGULAR INPUT COMPONENT:
+   - Text input with validation
+   - Different keyboard types
+   - Multiline support
+   - Character limits
+   - Width options (full/half)
+   - Auto capitalization control
+
+4. INPUT WITH DROPDOWN COMPONENT:
+   - Text input combined with dropdown
+   - Required field indicators
+   - Error message display
+   - Editable/non-editable states
+   - Custom dropdown options
+
+5. INPUT WITH UNITS COMPONENT:
+   - Numeric input with unit display
+   - Unit selection buttons
+   - Dropdown for unit options
+   - Combined unit buttons + dropdown
+   - Required field validation
+   - Disabled states with units
+
+ALL COMPONENTS SUPPORT:
+- Custom styling via containerStyle
+- Error states with custom messages
+- Disabled states
+- Consistent height: rh(6.8) / rh(7)
+- Standardized colors:
+  * Default: #C1C7CD
+  * Focused: #4589FF  
+  * Error: #FA4D56
+  * Disabled: #DDE1E6
+
+*/
+
+
+
+# Dropdown component
+npm install react-native-element-dropdown
+
+# Date picker component
+npm install react-native-date-picker
+
+# Icons (Material Icons)
+npm install react-native-vector-icons
+Link Fonts for react-native-vector-icons (if you’re not using Expo):
+npx react-native link react-native-vector-icons
+
+# Responsive dimensions (height/width/font)
+npm install react-native-responsive-dimensions
+
+# Device info
+npm install react-native-device-info
+
+# Dropdown component
+npm install react-native-element-dropdown
