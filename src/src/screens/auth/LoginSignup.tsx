@@ -3,30 +3,30 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
+
   View,
 } from 'react-native';
 import React, {useContext, useState} from 'react';
 import IconButton from '../../components/image/IconButton';
-import commonlayout from '../../styles/layout';
-import Description from '../../components/text/Description';
-import Header from '../../components/text/Header';
-import CustomInput from '../../components/input/CustomInput';
-import CustomInputWithIcon from '../../components/input/CustomInputWithIcon';
 
-import PasswordInput from '../../components/input/PasswordInput';
-import CustomButton from '../../components/Button/CustomButton';
-import InlinePressableText from '../../components/text/InlinePressableText';
 
 import {showToast} from '../../utils/toast';  
 import { isValidEmail, isValidPassword } from '../../utils/validators';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
+
 import { AuthContext } from '../../context/AuthContext';
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 
 const LoginSignup = () => {
-  const { login } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+  
+  if (!authContext) {
+    console.error('AuthContext not found');
+    return null;
+  }
+  
+  const { login } = authContext;
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,10 +35,6 @@ const LoginSignup = () => {
   console.log('isLogin:::::', isLogin);
 
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigation();
-  function alert(arg0: string) {
-    throw new Error('Function not implemented.');
-  }
 
   const handleRegister = async () => {
     if (!userName || !email || !password) {
@@ -100,8 +96,9 @@ const LoginSignup = () => {
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <ScrollView contentContainerStyle={{flexGrow: 1}} keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.topContainer}>
             <IconButton
@@ -115,227 +112,29 @@ const LoginSignup = () => {
               disabled={true}
             />
           </View>
-          {isLogin && (
-            <View style={styles.bottomContainer}>
-              <Header
-                title="Login"
-                color="black"
-                size={25}
-                alignItems="left"
-                textAlign="left"
-                backgroundColor="transparent"
-                paddingHorizontal={0}
+          <View style={styles.bottomContainer}>
+            {isLogin ? (
+              <LoginForm
+                email={email}
+                password={password}
+                onEmailChange={setEmail}
+                onPasswordChange={setPassword}
+                onLogin={handleLogin}
+                onSwitchToSignup={() => setIsLogin(false)}
               />
-
-              <Description
-                title="Enter your email and password"
-                color="#888"
-                size={16}
-                align="left"
-                paddingHorizontal={0}
+            ) : (
+              <SignupForm
+                userName={userName}
+                email={email}
+                password={password}
+                onUserNameChange={setUserName}
+                onEmailChange={setEmail}
+                onPasswordChange={setPassword}
+                onSignup={handleRegister}
+                onSwitchToLogin={() => setIsLogin(true)}
               />
-
-              <CustomInput
-                label="Email"
-                value={email}
-                onChangeText={setEmail}
-                placeholder="Enter email"
-                borderColor="#e2e2e2"
-                isColumn={true}
-                inputContainerStyle={{
-                  borderBottomWidth: 1.3,
-                  borderRadius: 5,
-                  borderWidth: 0,
-                  backgroundColor: 'rgba(0, 0, 0, 0.07)',
-                }}
-              />
-
-              <PasswordInput
-                label="Password"
-                value={password}
-                onChangeText={setPassword}
-                placeholder="Enter your password"
-                showIcon={require('../../assets/images/password-show.png')}
-                hideIcon={require('../../assets/images/password-hide.png')}
-                placeholderTextColor="#888"
-                isColumn={true}
-                inputContainerStyle={{
-                  borderBottomWidth: 1.3,
-                  borderRadius: 5,
-                  borderWidth: 0,
-                  backgroundColor: 'rgba(0, 0, 0, 0.07)',
-                }}
-              />
-              <Description
-                title="Forget Password ?"
-                color="#888"
-                size={16}
-                align="flex-end"
-                paddingHorizontal={0}
-              />
-
-              <CustomButton
-                title="Log in"
-                onPress={handleLogin}
-                backgroundColor="#53B175"
-                borderRadius={10}
-                fontSize={16}
-                align="center"
-                width="100%"
-                paddingVertical={15}
-                disabled={false}
-                style={{marginTop: 10}}
-              />
-
-              <View style={commonlayout.rowCenter}>
-                <Description
-                  title="Don't have an account ?"
-                  color="#000"
-                  size={16}
-                  paddingHorizontal={10}
-                />
-
-                <Description
-                  title="Signup"
-                  color="#53B175"
-                  size={16}
-                  paddingHorizontal={0}
-                  disabled={false}
-                  onPress={() => setIsLogin(false)}
-                />
-              </View>
-            </View>
-          )}
-
-          {!isLogin && (
-            <View style={styles.bottomContainer}>
-              <Header
-                title="Sign Up"
-                color="black"
-                size={25}
-                alignItems="left"
-                textAlign="left"
-                backgroundColor="transparent"
-                paddingHorizontal={0}
-              />
-
-              <Description
-                title="Enter your credentials to continue"
-                color="#888"
-                size={16}
-                align="left"
-                paddingHorizontal={0}
-              />
-
-              <CustomInput
-                label="Username"
-                value={userName}
-                onChangeText={setUserName}
-                placeholder="Enter username"
-                borderColor="#e2e2e2"
-                isColumn={true}
-                inputContainerStyle={{
-                  borderBottomWidth: 1.3,
-                  borderRadius: 5,
-                  borderWidth: 0,
-                  backgroundColor: 'rgba(0, 0, 0, 0.07)',
-                }}
-              />
-
-              <CustomInput
-                label="Email"
-                value={email}
-                onChangeText={setEmail}
-                placeholder="Enter email"
-                borderColor="#e2e2e2"
-                isColumn={true}
-                inputContainerStyle={{
-                  borderBottomWidth: 1.3,
-                  borderRadius: 5,
-                  borderWidth: 0,
-                  backgroundColor: 'rgba(0, 0, 0, 0.07)',
-                }}
-              />
-
-              <PasswordInput
-                label="Password"
-                value={password}
-                onChangeText={setPassword}
-                placeholder="Enter your password"
-                showIcon={require('../../assets/images/password-show.png')}
-                hideIcon={require('../../assets/images/password-hide.png')}
-                placeholderTextColor="#888"
-                isColumn={true}
-                inputContainerStyle={{
-                  borderBottomWidth: 1.3,
-                  borderRadius: 5,
-                  borderWidth: 0,
-                  backgroundColor: 'rgba(0, 0, 0, 0.07)',
-                }}
-              />
-
-              <View style={commonlayout.rowLeft}>
-                <InlinePressableText
-                  segments={[
-                    {text: 'By continuing you agree to our', color: '#888'},
-                    {
-                      text: ' Terms of Service ',
-                      color: 'green',
-                      // fontSize:12,
-                      fontWeight: 400,
-                      pressedColor: 'blue',
-                      pressedOpacity: 0.6,
-                      textDecorationLine: 'underline',
-                      onPress: () => console.log('Terms clicked'),
-                    },
-                    {text: 'and', color: '#888'},
-                    {
-                      text: ' Privacy Policy ',
-                      color: 'green',
-                      fontWeight: 400,
-                      pressedColor: 'red',
-                      pressedOpacity: 0.9,
-                      textDecorationLine: 'underline',
-                      onPress: () => console.log('Privacy clicked'),
-                    },
-                    {text: '.', color: 'black'},
-                  ]}
-                />
-              </View>
-
-              <CustomButton
-                title="Sign Up"
-                onPress={handleRegister}
-                backgroundColor="#53B175"
-                borderRadius={10}
-                fontSize={16}
-                align="center"
-                width="100%"
-                paddingVertical={15}
-                disabled={false}
-                style={{marginTop: 10}}
-              />
-
-              <View style={commonlayout.rowCenter}>
-                <Description
-                  title="Already have an account ?"
-                  color="#000"
-                  size={16}
-                  paddingHorizontal={10}
-                />
-
-                <Description
-                  title="Login"
-                  color="#53B175"
-                  size={16}
-                  fontWeight={700}
-                  paddingHorizontal={0}
-                  disabled={false}
-                  onPress={() => setIsLogin(true)}
-                />
-              </View>
-            </View>
-          )}
+            )}
+          </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -360,3 +159,6 @@ const styles = StyleSheet.create({
     // backgroundColor: 'gray',
   },
 });
+
+
+

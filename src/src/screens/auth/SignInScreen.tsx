@@ -13,16 +13,17 @@ import {
   Platform,
 } from 'react-native';
 
-import Header from '../../components/text/Header';
-import Description from '../../components/text/Description';
+import Header from '../../allComponents/text/Header';
+import Description from '../../allComponents/text/Description';
 import IconButton from '../../components/image/IconButton';
 
 //-----------------vv----------------
 import {useForm, FieldValues} from 'react-hook-form';
 import PhoneInputField from '../../components/PhoneInputField';
-import CustomButton from '../../components/Button/CustomButton';
-import CustomButtonWithIcon from '../../components/Button/CustomButtonWithIcon';
+import CustomButton from '../../allComponents/button/CustomButton';
+import CustomButtonWithIcon from '../../allComponents/button/CustomButtonWithIcon';
 import { useNavigation } from '@react-navigation/native';
+
 
 // Assuming you have the image in your assets
 const SignInScreen = () => {

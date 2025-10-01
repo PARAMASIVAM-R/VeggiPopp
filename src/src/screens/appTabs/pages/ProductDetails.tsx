@@ -4,8 +4,9 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import { ProductContext } from '../../../context/ProductContext';
 import ProductCard from '../../../components/page/ProductCard'; // adjust path as needed
 import IconButton from '../../../components/image/IconButton';
-import Header from '../../../components/text/Header';
+
 import commonlayout from '../../../styles/layout';
+import Header from '../../../allComponents/text/Header';
 
 const ProductDetails = () => {
   const { params } = useRoute<any>();

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import CustomButton from '../../components/Button/CustomButton';
+import CustomButton from '../../allComponents/button/CustomButton';
 import { AuthContext } from '../../context/AuthContext';
 import colors from '../../constants/colors';
 

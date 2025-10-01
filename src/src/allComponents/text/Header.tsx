@@ -1,27 +1,4 @@
-// import React from 'react';
-// import { View, Text, StyleSheet } from 'react-native';
-// import colors from '../constants/colors';
 
-// const Header = ({ title }) => (
-//   <View style={styles.header}>
-//     <Text style={styles.title}>{title}</Text>
-//   </View>
-// );
-
-// const styles = StyleSheet.create({
-//   header: {
-//     paddingVertical: 20,
-//     backgroundColor: colors.primary,
-//     alignItems: 'center',
-//   },
-//   title: {
-//     color: colors.white,
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//   },
-// });
-
-// export default Header;
 
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';

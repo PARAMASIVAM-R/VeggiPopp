@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import React from 'react';
 import IconButton from '../../components/image/IconButton';
-import Header from '../../components/text/Header';
-import Description from '../../components/text/Description';
+import Header from '../../allComponents/text/Header';
+import Description from '../../allComponents/text/Description';
 import OTPInput from '../../components/OTPInput';
 import {useNavigation} from '@react-navigation/native';
 import commonlayout from '../../styles/layout';

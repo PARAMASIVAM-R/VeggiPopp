@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet, ImageBackground} from 'react-native';
-import Description from '../../components/text/Description';
-import Header from '../../components/text/Header';
-import CustomButton from '../../components/Button/CustomButton';
+import Header from '../../allComponents/text/Header';
+import Description from '../../allComponents/text/Description';
+import CustomButton from '../../allComponents/button/CustomButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const WelcomeScreen = ({navigation}) => {

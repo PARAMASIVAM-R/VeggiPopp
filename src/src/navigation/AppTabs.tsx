@@ -1,9 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Image, StyleSheet } from 'react-native';
 
-import TabIcon from '../components/tap/TabIcon';
-
-//----below imports are all for components screen
+// ---- Screens
 import Shop from '../screens/appTabs/Shop';
 import Explore from '../screens/appTabs/Explore';
 import Cart from '../screens/appTabs/Cart';
@@ -14,13 +13,36 @@ import componentTest from '../allComponents/screen/componentTest';
 
 const Tab = createBottomTabNavigator();
 
+// ---- Tab Icon Component
+interface TabIconProps {
+  focused: boolean;
+  filledIcon: any;
+  outlineIcon: any;
+}
+
+const TabIcon: React.FC<TabIconProps> = ({ focused, filledIcon, outlineIcon }) => {
+  return (
+    <Image
+      source={focused ? filledIcon : outlineIcon}
+      style={[
+        styles.icon,
+        { tintColor: focused ? 'rgba(83, 177, 117, 1)' : 'rgba(24, 23, 37, 1)' },
+      ]}
+    />
+  );
+};
+
+// ---- Tabs
 const AppTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarIcon: ({ focused }) => {
-          const icons = {
+          const icons: Record<
+            string,
+            { filled: any; outline: any }
+          > = {
             Shop: {
               filled: require('../assets/taps/shope-filled.png'),
               outline: require('../assets/taps/shop-outline.png'),
@@ -61,3 +83,21 @@ const AppTabs = () => {
 };
 
 export default AppTabs;
+
+const styles = StyleSheet.create({
+  icon: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+  },
+});
+
+
+
+
+
+
+
+
+
+

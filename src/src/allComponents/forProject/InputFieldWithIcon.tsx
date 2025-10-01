@@ -1,27 +1,23 @@
-import React, {useState, useRef} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Image,
   Platform,
   ViewStyle,
   TextStyle,
   UIManager,
   Dimensions,
 } from 'react-native';
-import {Dropdown} from 'react-native-element-dropdown';
-import DatePicker from 'react-native-date-picker';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   responsiveHeight as rh,
   responsiveFontSize as rf,
 } from 'react-native-responsive-dimensions';
 import DeviceInfo from 'react-native-device-info';
 import { Colors } from '../utils/colorsFonts';
-import responsive from '../utils/responsive';
-
 
 // Enable LayoutAnimation for Android
 if (
@@ -31,19 +27,19 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const isTablet = DeviceInfo.isTablet();
 const isPortrait = height > width;
 const isTabletPortrait = isTablet && isPortrait;
 
 const DIMENSIONS = {
-  height: isTabletPortrait ? rh(7) : rh(6.8), // Same height for all components
+  height: isTabletPortrait ? rh(7) : rh(6.8),
   borderRadius: 12,
   borderWidth: 1,
   paddingHorizontal: rh(2),
-  fontSize: isTabletPortrait ? rf(1.1): rf(1.6),
-  labelSize: isTabletPortrait ? rf(1.3): rf(1.7),
-  errorSize:isTabletPortrait ? rf(0.9): rf(1.4),
+  fontSize: rf(1.7),
+  labelSize: rf(1.7),
+  errorSize: rf(1.5),
   marginBottom: rh(2),
 };
 
@@ -60,6 +56,8 @@ const getInputContainerStyle = (
     borderWidth: DIMENSIONS.borderWidth,
     paddingHorizontal: DIMENSIONS.paddingHorizontal,
     justifyContent: 'center' as const,
+    flexDirection: 'row' as const,
+    alignItems: 'center' as const,
   };
 
   if (disabled) {
@@ -85,7 +83,7 @@ const getInputContainerStyle = (
       borderColor: Colors.focused,
       backgroundColor: Colors.focusedBg,
       shadowColor: Colors.focused,
-      shadowOffset: {width: 0, height: 0},
+      shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 0.2,
       shadowRadius: 4,
       elevation: 3,
@@ -99,7 +97,7 @@ const getInputContainerStyle = (
   };
 };
 
-interface InputFieldProps {
+interface InputFieldWithIconProps {
   label?: string;
   value: string;
   placeholder?: string;
@@ -108,22 +106,21 @@ interface InputFieldProps {
   onFocus?: () => void;
   disabled?: boolean;
   error?: string;
-  showDropdownIcon?: boolean;
-  onDropdownPress?: () => void;
   containerStyle?: ViewStyle;
   inputStyle?: TextStyle;
-  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad';
-  multiline?: boolean;
   maxLength?: number;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  allowedChars?: 'alphanumeric' | 'numeric' | 'letters' | 'all';
   autoCorrect?: boolean;
   editable?: boolean;
-  secureTextEntry?: boolean;
   width?: 'full' | 'half';
   customHeight?: number;
+  iconEmpty: any;   // local image when input is empty
+  iconFilled: any;  // local image when input has value
+  iconPosition?: 'left' | 'right'; // control where icon shows
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+const InputFieldWithIcon: React.FC<InputFieldWithIconProps> = ({
   label,
   value,
   placeholder,
@@ -132,24 +129,25 @@ const InputField: React.FC<InputFieldProps> = ({
   onFocus,
   disabled = false,
   error,
-  showDropdownIcon = false,
-  onDropdownPress,
   containerStyle,
   inputStyle,
-  keyboardType = 'default',
-  multiline = false,
   maxLength,
-  autoCapitalize = 'sentences',
-  autoCorrect = true,
+  autoCapitalize = 'none',
+  allowedChars = 'all',
+  autoCorrect = false,
   editable = true,
-  secureTextEntry = false,
   width = 'full',
   customHeight,
+  iconEmpty,
+  iconFilled,
+  iconPosition = 'right',
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleBlur = () => {
     setIsFocused(false);
+    const cleaned = value.trim().replace(/\s{2,}/g, ' ');
+    onChangeText(cleaned);
     onBlur?.();
   };
 
@@ -158,91 +156,94 @@ const InputField: React.FC<InputFieldProps> = ({
     onFocus?.();
   };
 
-  const inputContainerHeight =
-    customHeight || (multiline ? rh(12) : DIMENSIONS.height);
+  const inputContainerHeight = customHeight || DIMENSIONS.height;
   const inputContainerStyle = {
     ...getInputContainerStyle(isFocused, !!value, !!error, disabled),
     height: inputContainerHeight,
     width: width === 'half' ? '48%' : '100%',
-    flexDirection: 'row' as const,
-    alignItems: multiline ? ('flex-start' as const) : ('center' as const),
-    paddingVertical: multiline ? rh(1) : 0,
   };
+
+  const iconSource = value ? iconFilled : iconEmpty;
+
+const filterText = (text: string) => {
+  switch (allowedChars) {
+    case 'numeric':
+      return text.replace(/[^0-9]/g, '');
+    case 'letters':
+      return text.replace(/[^a-zA-Z]/g, '');
+    case 'alphanumeric':
+      return text.replace(/[^a-zA-Z0-9]/g, '');
+    default:
+      return text;
+  }
+};
 
   return (
     <View style={[commonStyles.container, containerStyle]}>
-      <Text
-        style={[
-          commonStyles.label,
-          disabled && {color: Colors.disabled},
-          // CHANGED: Make label red when there's an error
-          error && {color: Colors.text},
-        ]}>
-        {label}
-      </Text>
+      {label && (
+        <Text
+          style={[
+            commonStyles.label,
+            disabled && { color: Colors.disabled },
+            error && { color: Colors.error },
+          ]}
+        >
+          {label}
+        </Text>
+      )}
 
       <View style={inputContainerStyle}>
+        {iconPosition === 'left' && (
+          <Image
+            source={iconSource}
+            style={[
+              commonStyles.icon,
+              { tintColor: disabled ? Colors.disabled : Colors.icon },
+            ]}
+          />
+        )}
+
         <TextInput
           style={[
             commonStyles.input,
             {
               flex: 1,
-              color: disabled
-                ? Colors.disabled
-                : error
-                ? Colors.error
-                : Colors.text,
-              textAlignVertical: multiline ? 'top' : 'center',
-              paddingVertical: multiline ? rh(1) : rh(0.5),
+              color: disabled ? Colors.disabled : error ? Colors.error : Colors.text,
+              paddingVertical: rh(0.5),
             },
             inputStyle,
           ]}
           placeholder={placeholder}
-          placeholderTextColor={
-            disabled
-              ? Colors.disabled
-              : error
-              ? Colors.error
-              : Colors.placeholder
-          }
+          placeholderTextColor={Colors.placeholder}
           value={value}
-          onChangeText={onChangeText}
+          onChangeText={(text) => onChangeText(filterText(text))}
           onFocus={handleFocus}
           onBlur={handleBlur}
           editable={!disabled && editable}
-          keyboardType={keyboardType}
-          multiline={multiline}
           maxLength={maxLength}
           autoCapitalize={autoCapitalize}
           autoCorrect={autoCorrect}
-          secureTextEntry={secureTextEntry}
         />
 
-        {showDropdownIcon && (
-          <TouchableOpacity
-            onPress={onDropdownPress}
-            disabled={disabled}
-            style={commonStyles.iconContainer}>
-            <Icon
-              name="keyboard-arrow-down"
-              size={isTabletPortrait ? 24 : 20}
-              color={disabled ? Colors.disabled : Colors.default}
-            />
-          </TouchableOpacity>
+        {iconPosition === 'right' && (
+          <Image
+            source={iconSource}
+            style={[
+              commonStyles.icon,
+              { tintColor: disabled ? Colors.disabled : Colors.icon },
+            ]}
+          />
         )}
       </View>
 
-      <View style={{minHeight: DIMENSIONS.errorSize * 1.9}}>
-        {error ? <Text style={commonStyles.errorText}>{error}</Text> : null}
-      </View>
+      {error && <Text style={commonStyles.errorText}>{error}</Text>}
     </View>
   );
 };
 
 const commonStyles = StyleSheet.create({
   container: {
-    // marginBottom: DIMENSIONS.marginBottom,
-    marginBottom:responsive.spacing(0,0)
+    marginBottom: DIMENSIONS.marginBottom,
   },
   label: {
     fontSize: DIMENSIONS.labelSize,
@@ -254,7 +255,7 @@ const commonStyles = StyleSheet.create({
   input: {
     fontSize: DIMENSIONS.fontSize,
     fontFamily: Platform.OS === 'android' ? 'satoshi' : 'System',
-    paddingVertical: rh(0.9),
+    paddingVertical: rh(0.5),
   },
   errorText: {
     color: Colors.error,
@@ -263,11 +264,12 @@ const commonStyles = StyleSheet.create({
     marginLeft: rh(0.5),
     fontFamily: Platform.OS === 'android' ? 'satoshi' : 'System',
   },
-  iconContainer: {
-    padding: rh(0.5),
-    justifyContent: 'center',
-    alignItems: 'center',
+  icon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+    marginHorizontal: rh(0.5),
   },
 });
 
-export {InputField};
+export { InputFieldWithIcon };

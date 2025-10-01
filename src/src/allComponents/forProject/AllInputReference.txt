@@ -299,6 +299,18 @@ const InputComponentsExample = () => {
           containerStyle={{ marginBottom: rh(4) }}
         />
 
+        {================  ==================}
+        
+        <InputFieldWithIcon
+          label="Username"
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Enter username"
+          iconEmpty={require('../../assets/user-empty.png')}
+          iconFilled={require('../../assets/user-filled.png')}
+          allowedChars="alphanumeric"
+        />
+
       </View>
     </ScrollView>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
-import Header from '../text/Header';
-import Description from '../text/Description';
-import CustomButton from '../Button/CustomButton';
+import Header from '../../allComponents/text/Header';
+import Description from '../../allComponents/text/Description';
+import CustomButton from '../../allComponents/button/CustomButton';
 import IconButton from '../image/IconButton';
 
 interface ProductCardProps {
