@@ -213,7 +213,7 @@ const InputFieldWithDropdown: React.FC<InputFieldWithDropdownProps> = ({
               {selectedOption || dropdownOptions[0] || 'Select'}
             </Text>
             <Animated.View style={{ transform: [{ rotate: arrowRotation }] }}>
-              <Image source={require('../../assets/DropDownBlue.png')} style={commonStyles.dropdown} />
+              {/* <Image source={require('../../assets/DropDownBlue.png')} style={commonStyles.dropdown} /> */}
             </Animated.View>
           </TouchableOpacity>
         )}

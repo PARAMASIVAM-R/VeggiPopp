@@ -49,7 +49,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         value={email}
         onChangeText={onEmailChange}
         placeholder="Enter email"
-        keyboardType="email-address"
+        // keyboardType="email-address"
       />
 
       <InputFieldWithIcon

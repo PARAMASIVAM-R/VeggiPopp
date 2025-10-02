@@ -149,13 +149,13 @@ const InputField: React.FC<InputFieldProps> = ({
   const [isFocused, setIsFocused] = useState(false);
 
   const handleBlur = () => {
-    setIsFocused(false);
-    onBlur?.();
+    // setIsFocused(false);
+    // onBlur?.();
   };
 
   const handleFocus = () => {
-    setIsFocused(true);
-    onFocus?.();
+    // setIsFocused(true);
+    // onFocus?.();
   };
 
   const inputContainerHeight =
@@ -218,18 +218,19 @@ const InputField: React.FC<InputFieldProps> = ({
           secureTextEntry={secureTextEntry}
         />
 
-        {showDropdownIcon && (
-          <TouchableOpacity
-            onPress={onDropdownPress}
-            disabled={disabled}
-            style={commonStyles.iconContainer}>
-            <Icon
-              name="keyboard-arrow-down"
-              size={isTabletPortrait ? 24 : 20}
-              color={disabled ? Colors.disabled : Colors.default}
-            />
-          </TouchableOpacity>
-        )}
+{showDropdownIcon && (
+  <TouchableOpacity
+    onPress={onDropdownPress}
+    disabled={disabled}
+    style={commonStyles.iconContainer}
+  >
+    <Icon
+      name="keyboard-arrow-down"
+      size={isTabletPortrait ? 24 : 20}
+      color={disabled ? Colors.disabled : Colors.default}
+    />
+  </TouchableOpacity>
+)}
       </View>
 
       <View style={{minHeight: DIMENSIONS.errorSize * 1.9}}>

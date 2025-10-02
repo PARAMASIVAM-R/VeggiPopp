@@ -145,15 +145,15 @@ const InputFieldWithIcon: React.FC<InputFieldWithIconProps> = ({
   const [isFocused, setIsFocused] = useState(false);
 
   const handleBlur = () => {
-    setIsFocused(false);
-    const cleaned = value.trim().replace(/\s{2,}/g, ' ');
-    onChangeText(cleaned);
-    onBlur?.();
+    // setIsFocused(false);
+    // const cleaned = value.trim().replace(/\s{2,}/g, ' ');
+    // onChangeText(cleaned);
+    // onBlur?.();
   };
 
   const handleFocus = () => {
-    setIsFocused(true);
-    onFocus?.();
+    // setIsFocused(true);
+    // onFocus?.();
   };
 
   const inputContainerHeight = customHeight || DIMENSIONS.height;
